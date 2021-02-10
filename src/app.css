@@ -6,13 +6,14 @@ selectors and properties you can use to style UI components.
 
 /*
 In many cases you may want to use the NativeScript core theme instead
-of writing your own CSS rules. You can learn more about the 
+of writing your own CSS rules. You can learn more about the
 NativeScript core theme at https://github.com/nativescript/theme
 The imported CSS rules must precede all other types of rules.
 */
+/* @import "~@nativescript/theme/css/core.css";
+@import "~@nativescript/theme/css/default.css"; */
 @import "~@nativescript/theme/css/core.css";
-@import "~@nativescript/theme/css/default.css";
-
+@import "~@nativescript/theme/css/blue.css";
 /* Place any CSS rules you want to apply on both iOS and Android here.
 This is where the vast majority of your CSS code goes. */
 
@@ -20,6 +21,66 @@ This is where the vast majority of your CSS code goes. */
 The following CSS rule changes the font size of all Buttons that have the
 "-primary" class modifier.
 */
+
+.fab {
+    font-family: "Font Awesome 5 Brands", "fa-brands-400";
+    font-weight: 400;
+}
+
+.fas {
+    font-family: "Font Awesome 5 Free", "fa-solid-900";
+    font-weight: 900;
+}
+
+.far {
+    font-family: "Font Awesome 5 Free", "fa-regular-400";
+    font-weight: 400;
+}
+
+
 Button.-primary {
     font-size: 18;
+}
+
+.border {
+    border-width: 1;
+    border-color: #9f9f9f;
+    border-radius: 5;
+}
+
+.no-border {
+    border-width: 0;
+}
+
+.sidedrawer-left {
+    background-color: #D1C4E9;
+}
+
+.sidedrawer-header {
+    background-color: #512DA8;
+}
+
+.sidedrawer-header .sidedrawer-header-image {
+    background-color: #512DA8;
+    margin: 10;
+}
+
+.sidedrawer-header .sidedrawer-header-brand {
+    color: #ffffff;
+    font-size: 30;
+}
+
+.sidedrawer-list-item {
+    padding-left: 15;
+    color: black;
+}
+
+.sidedrawer-list-item-text {
+    font-size: 20;
+    border-width: 0;
+}
+
+.selected {
+    background-color: #B39DDB;
+    color: blue;
 }

@@ -1,14 +1,15 @@
 import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "@nativescript/angular";
-
-import { ItemsComponent } from "./item/items.component";
-import { ItemDetailComponent } from "./item/item-detail.component";
+import { DishdetailComponent } from "./dishdetail/dish-detail.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/items", pathMatch: "full" },
-    { path: "items", component: ItemsComponent },
-    { path: "item/:id", component: ItemDetailComponent }
+    { path: "", redirectTo: "/home", pathMatch: "full" },
+    { path: "menu", loadChildren: () => import("./menu/menu.module").then((m) => m.MenuModule) },
+    { path: "about", loadChildren: () => import("./about/about.module").then((m) => m.AboutModule) },
+    { path: "leader", loadChildren: () => import("./leader/leader.module").then((m) => m.LeaderModule) },
+    { path: "home", loadChildren: () => import("./home/home.module").then((m) => m.HomeModule) },
+    { path: 'dishdetail/:id',     component: DishdetailComponent },
 ];
 
 @NgModule({

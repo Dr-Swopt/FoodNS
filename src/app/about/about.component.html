@@ -1,0 +1,21 @@
+<ActionBar >
+    <NavigationButton ios:visibility="collapsed" icon="font://&#xf0c9;"  class="fas size" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <ActionItem icon="font://&#xf0c9;" android:visibility="collapsed"   class="fas size" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label text="About Us"></Label>
+  </ActionBar>
+<GridLayout class="m-5" rows="auto auto auto">
+    <StackLayout row="0" class="p-10 border">
+        <StackLayout>
+            <Label class="h2" text="Our Address"></Label>
+            <Label text="121, Clear Water Bay Road"></Label>
+            <Label text="Clear Water Bay, Kowloon"></Label>
+            <Label style="font-style:inherit ;" text="HONG KONG"></Label>
+            <Label text="Tel: +852 1234 5678"></Label>
+            <Label text="Fax: +852 8765 4321"></Label>
+            <Label text="Email:confusion@food.net"></Label>
+        </StackLayout>
+    </StackLayout>
+
+</GridLayout>
