@@ -3,7 +3,8 @@ import { NavigationEnd, Router } from "@angular/router";
 import { RouterExtensions } from "@nativescript/angular";
 import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
 import { filter } from "rxjs/operators";
-import { Application } from "@nativescript/core";
+import { Application, login, LoginResult } from "@nativescript/core";
+import { getString, setString } from "@nativescript/core/application-settings";
 
 @Component({
     selector: "ns-app",
@@ -15,6 +16,25 @@ export class AppComponent {
 
     constructor(private router: Router, private routerExtensions: RouterExtensions) {
         // Use the component constructor to inject services.
+    }
+
+    displayLoginDialog() {
+        let options = {
+            title: "Login",
+            message: 'Type Your Login Credentials',
+            userName: getString("userName", ""),
+            password: getString("password",""),
+            okButtonText: "Login",
+            cancelButtonText: "Cancel"
+        }
+
+        login(options)
+            .then((loginResult: LoginResult) => {
+                setString("userName", loginResult.userName);
+                setString("password", loginResult.password);
+            },
+            () => { console.log('Login cancelled');
+        });
     }
 
     ngOnInit(): void {

@@ -1,0 +1,27 @@
+<ActionBar >
+    <NavigationButton ios:visibility="collapsed" icon="font://&#xf0c9;"  class="fas size" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <ActionItem icon="font://&#xf0c9;" android:visibility="collapsed"   class="fas size" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label text="Pokemon"></Label>
+  </ActionBar>
+
+<RadListView [items]="pokemons" [itemTemplateSelector]="templateSelector" class="list-group" (itemTap)="onItemTap($event)" *ngIf="pokemons">
+    <ng-template tkListItemTemplate let-item="item">
+        <GridLayout rows="auto,auto" columns="6*,*" class="add-dropdown" class="p-10 border">
+            <Label style="font-size: 14;" [text]="item.name" class="list-group-item" col="0"></Label>
+            <Image row="0" col="1" [src]="item.src" class="thumb"></Image>
+        </GridLayout>
+
+    </ng-template>
+    <ng-template tkTemplateKey="expanded" let-item="item">
+        <GridLayout rows="auto,auto,auto" columns="6*,*" class="list-group-item add-dropdown" class="p-10 border">
+            <Label style="font-size: 16;" row="0" col="0" [text]="item.name" class="font-weight-bold"></Label>
+            <Image row="0" col="1" rowSpan="2" [src]="item.src"></Image>
+            <Label style="font-size: 14;" row="1" col="0" [text]="item.description" textWrap="true"></Label>
+        </GridLayout>
+
+    </ng-template>
+</RadListView>
+<ActivityIndicator busy="true"  *ngIf="!(pokemons || errMess)" width="50" height="50" class="activity-indicator"></ActivityIndicator>
+    <Label *ngIf="errMess" [text]="'Error: ' + errMess"></Label>

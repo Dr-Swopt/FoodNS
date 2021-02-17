@@ -9,6 +9,9 @@ const routes: Routes = [
     { path: "about", loadChildren: () => import("./about/about.module").then((m) => m.AboutModule) },
     { path: "leader", loadChildren: () => import("./leader/leader.module").then((m) => m.LeaderModule) },
     { path: "home", loadChildren: () => import("./home/home.module").then((m) => m.HomeModule) },
+    { path: "pokemon", loadChildren: () => import("./pokemon/pokemon.module").then((m) => m.PokemonModule) },
+    { path: "favourites", loadChildren: () => import("./favourites/favourites.module").then((m) => m.FavouriteModule) },
+    { path: "reservation", loadChildren: () => import("./reservations/reservation.module").then((m) => m.ReservationModule) },
     { path: 'dishdetail/:id',     component: DishdetailComponent },
 ];
 

@@ -43,7 +43,7 @@ export class DishService {
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
-  getDish(id: string): Observable<Dish> {
+  getDish(id: number): Observable<Dish> {
     return this.http.get<Dish>(this.baseURL + id)
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }

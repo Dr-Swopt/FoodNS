@@ -1,5 +1,8 @@
 <ActionBar title="Dish Details" class="action-bar">
     <NavigationButton android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+    <ActionItem icon="font://&#xf142;" android.position="popup" class="fas size" text="add Comment"
+        ios.position="right" style="color: aliceblue;">
+    </ActionItem>
 </ActionBar>
 <ScrollView orientation="vertical">
     <GridLayout class="m-5" rows="auto auto auto" *ngIf="dish">
@@ -9,6 +12,11 @@
                 <Label class="h2" [text]="dish.name"></Label>
                 <Label class="body" [text]="dish.description" textWrap="true"></Label>
             </StackLayout>
+            <GridLayout orientation="horizontal" rows="*" columns="*, *, *" class="m-t-20">
+                <Button row="0" col="0" [text]="avgstars + ' stars'" class="btn btn-rounded-sm btn-outline no-border"></Button>
+                <Button row="0" col="1" [text]="numcomments + ' comments'" class="btn btn-rounded-sm btn-outline no-border"></Button>
+                <Button row="0" col="2" [text]="(favourite? '&#xf06d;' : '&#xf7e4;')" class="btn btn-rounded-sm btn-outline no-border nt-icon fas" (tap)="addToFavourites()"></Button>
+            </GridLayout>
         </StackLayout>
         <Label row="1" height="40" class="p-10 m-t-10 h3" text="Comments"></Label>
         <ListView row="2" height="500" [items]="dish.comments" class="list-group p-10">

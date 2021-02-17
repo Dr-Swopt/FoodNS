@@ -19,7 +19,7 @@ export class LeaderService {
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
-  getLeader(id: string): Observable<Leader> {
+  getLeader(id: number): Observable<Leader> {
     return this.http.get<Leader>(this.baseURL + id)
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
