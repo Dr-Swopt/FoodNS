@@ -5,6 +5,9 @@ import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nat
 import { filter } from "rxjs/operators";
 import { Application, login, LoginResult } from "@nativescript/core";
 import { getString, setString } from "@nativescript/core/application-settings";
+import { Leader } from "./shared/leader";
+import { LeaderService } from "./service/leader.service";
+import { PlatformService } from "./service/platform.service";
 
 @Component({
     selector: "ns-app",
@@ -13,28 +16,14 @@ import { getString, setString } from "@nativescript/core/application-settings";
 export class AppComponent {
     private _activatedUrl: string;
     private _sideDrawerTransition: DrawerTransitionBase;
+    leaders: Leader[];
+    errMess: any;
 
-    constructor(private router: Router, private routerExtensions: RouterExtensions) {
+    constructor(private router: Router,
+         private routerExtensions: RouterExtensions,
+         private leaderService: LeaderService,
+         private platformService: PlatformService) {
         // Use the component constructor to inject services.
-    }
-
-    displayLoginDialog() {
-        let options = {
-            title: "Login",
-            message: 'Type Your Login Credentials',
-            userName: getString("userName", ""),
-            password: getString("password",""),
-            okButtonText: "Login",
-            cancelButtonText: "Cancel"
-        }
-
-        login(options)
-            .then((loginResult: LoginResult) => {
-                setString("userName", loginResult.userName);
-                setString("password", loginResult.password);
-            },
-            () => { console.log('Login cancelled');
-        });
     }
 
     ngOnInit(): void {
@@ -44,7 +33,23 @@ export class AppComponent {
         this.router.events
         .pipe(filter((event: any) => event instanceof NavigationEnd))
         .subscribe((event: NavigationEnd) => this._activatedUrl = event.urlAfterRedirects);
+
+        this.leaderService.getLeaders()
+        .subscribe(leaders => this.leaders = leaders,
+        errmess => this.errMess = <any>errmess);
+
+        this.platformService.printPlatformInfo();
+        this.platformService.startMonitoringNetwork()
+        .subscribe((message: string) => {
+        console.log(message);
+
+    });
     }
+
+    ngOnDestroy() {
+        this.platformService.stopMonitoringNetwork();
+      }
+
 
     get sideDrawerTransition(): DrawerTransitionBase {
         return this._sideDrawerTransition;

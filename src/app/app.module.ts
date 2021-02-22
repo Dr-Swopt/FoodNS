@@ -18,6 +18,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ReservationModalComponent } from "./reservationmodel/reservationmodal.component";
 import { CommentModalComponent } from './commentmodal/commentmodal.component';
 import { CouchbaseService } from "./service/couchbase.service";
+import { PlatformService } from "./service/platform.service";
 @NgModule({
     bootstrap: [
         AppComponent
@@ -40,7 +41,7 @@ import { CouchbaseService } from "./service/couchbase.service";
         CommentModalComponent
     ],
     entryComponents: [ReservationModalComponent],
-    providers: [ProcessHTTPMsgService, DishService, LeaderService, PromotionService, FavouriteService, PokemonService, CouchbaseService],
+    providers: [ProcessHTTPMsgService, DishService, LeaderService, PromotionService, FavouriteService, PokemonService, CouchbaseService, PlatformService],
     schemas: [
         NO_ERRORS_SCHEMA
     ]

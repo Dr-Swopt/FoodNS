@@ -1,18 +1,18 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "@nativescript/angular";
 
-import { ContactRoutingModule } from "./contact-routing.module";
-import { ContactComponent } from "./contact.component";
+import { UserAuthRoutingModule } from "./userauth-routing.module";
+import { UserAuthComponent } from "./userauth.component";
 @NgModule({
     imports: [
         NativeScriptCommonModule,
-        ContactRoutingModule
+        UserAuthRoutingModule
     ],
     declarations: [
-        ContactComponent,
+        UserAuthComponent,
     ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
 })
-export class ContactModule { }
+export class UserAuthModule { }

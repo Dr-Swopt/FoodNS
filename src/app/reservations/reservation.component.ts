@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalDialogOptions, ModalDialogService } from '@nativescript/angular';
-import { Application, Switch, TextField } from '@nativescript/core';
+import { Application, Enums, EventData, Label, Page, ScrollView, StackLayout, Switch, TextField } from '@nativescript/core';
+import { AnimationCurve } from '@nativescript/core/ui/enums';
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 import { ReservationModalComponent } from '../reservationmodel/reservationmodal.component';
 
@@ -15,6 +16,7 @@ import { ReservationModalComponent } from '../reservationmodel/reservationmodal.
 export class ReservationComponent implements OnInit {
 
     reservation: FormGroup;
+    view: ScrollView;
 
     constructor(private formBuilder: FormBuilder,
     private modalService: ModalDialogService,
@@ -27,6 +29,14 @@ export class ReservationComponent implements OnInit {
     }
 
     ngOnInit() {
+    }
+
+    // Event handler for Page "pageLoaded" event attached in home-page.xml
+    pageLoaded(args: EventData) {
+        let page = <StackLayout>args.object;
+        this.view = <ScrollView>page.getViewById("scroll1")
+        // Get reference to object we want to animate with code
+        /* this.view = <Label>page.getViewById("lblNS"); */
     }
 
     onSmokingChecked(args) {
@@ -53,10 +63,14 @@ export class ReservationComponent implements OnInit {
 
     onSubmit() {
         console.log(JSON.stringify(this.reservation.value));
+        this.view.animate({
+            opacity: 0,
+            duration: 500,
+            curve: AnimationCurve.easeInOut,
+        });
     }
 
     createModalView(args) {
-
         let options: ModalDialogOptions = {
             viewContainerRef: this.vcRef,
             context: args,
