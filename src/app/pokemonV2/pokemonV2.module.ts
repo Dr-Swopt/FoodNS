@@ -3,20 +3,20 @@ import { NativeScriptCommonModule } from "@nativescript/angular";
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 import { SearchModule } from "../search/search.module";
 
-import { PokemonRoutingModule } from "./pokemon-routing.module";
-import { PokemonComponent } from "./pokemon.component";
+import { PokemonV2RoutingModule } from "./pokemonV2-routing.module";
+import { PokemonV2Component } from "./pokemonV2.component";
 @NgModule({
     imports: [
         NativeScriptCommonModule,
-        PokemonRoutingModule,
+        PokemonV2RoutingModule,
         NativeScriptUIListViewModule,
         SearchModule
     ],
     declarations: [
-        PokemonComponent,
+        PokemonV2Component,
     ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
 })
-export class PokemonModule { }
+export class PokemonV2Module { }

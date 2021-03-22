@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProcessHTTPMsgService } from './process-http.service';
+import { baseURL } from '../shared/baseUrl';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -17,14 +18,14 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class DishService {
-    private baseURL = "http://10.0.2.2:3000/dishes/";
+    private serverUrl = "https://swopt.com:5000/";
 
   constructor(private http: HttpClient,
     private processHTTPMsgService: ProcessHTTPMsgService) { }
 
     getData() {
         let headers = this.createRequestHeader();
-        return this.http.get(this.baseURL, { headers: headers });
+        return this.http.get(this.serverUrl + 'dishes/', { headers: headers });
     }
 
     private createRequestHeader() {
@@ -39,17 +40,17 @@ export class DishService {
     }
 
   getDishes(): Observable<Dish[]> {
-    return this.http.get<Dish[]>(this.baseURL)
+    return this.http.get<Dish[]>(this.serverUrl + 'dishes/')
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
   getDish(id: number): Observable<Dish> {
-    return this.http.get<Dish>(this.baseURL + id)
+    return this.http.get<Dish>(this.serverUrl + 'dishes/' + id)
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
   getFeaturedDish(): Observable<Dish> {
-    return this.http.get<Dish[]>(this.baseURL + '?featured=true').pipe(map(dishes => dishes[0]))
+    return this.http.get<Dish[]>(this.serverUrl + 'dishes/' + '?featured=true').pipe(map(dishes => dishes[0]))
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 }

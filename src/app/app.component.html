@@ -61,6 +61,11 @@ https://docs.nativescript.org/angular/ui/professional-ui-components/ng-SideDrawe
                     <Label col="0" text="&#xf4fc;" class="nt-icon fas"></Label>
                     <Label col="1" text="Authentication" class="p-r-10"></Label>
                 </GridLayout>
+
+                <GridLayout columns="auto, *" class="nt-drawer__list-item" [class.-selected]="isComponentSelected('/pokemon2')" (tap)="onNavItemTap('/pokemon2')">
+                    <Label col="0" text="&#xf412;" class="nt-icon fab"></Label>
+                    <Label col="1" text="Pokemon II" class="p-r-10"></Label>
+                </GridLayout>
             </StackLayout>
         </ScrollView>
     </GridLayout>

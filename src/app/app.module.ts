@@ -8,6 +8,7 @@ import { DishService } from './service/dish.service';
 import { LeaderService } from './service/leader.service';
 import { PromotionService } from './service/promotion.service';
 import { PokemonService } from './service/pokemon.service';
+import { NewsService } from './service/news.service';
 import { FavouriteService } from './service/favourite.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NativeScriptHttpClientModule } from "@nativescript/angular";
@@ -19,6 +20,9 @@ import { ReservationModalComponent } from "./reservationmodel/reservationmodal.c
 import { CommentModalComponent } from './commentmodal/commentmodal.component';
 import { CouchbaseService } from "./service/couchbase.service";
 import { PlatformService } from "./service/platform.service";
+import { SearchModule } from "./search/search.module";
+import { NativeScriptUIAutoCompleteTextViewModule } from "nativescript-ui-autocomplete/angular";
+import { baseURL } from './shared/baseUrl';
 @NgModule({
     bootstrap: [
         AppComponent
@@ -31,7 +35,9 @@ import { PlatformService } from "./service/platform.service";
         NativeScriptUISideDrawerModule,
         NativeScriptUIListViewModule,
         NativeScriptFormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SearchModule,
+        NativeScriptUIAutoCompleteTextViewModule,
     ],
     exports: [ReservationModalComponent],
     declarations: [
@@ -41,7 +47,7 @@ import { PlatformService } from "./service/platform.service";
         CommentModalComponent
     ],
     entryComponents: [ReservationModalComponent],
-    providers: [ProcessHTTPMsgService, DishService, LeaderService, PromotionService, FavouriteService, PokemonService, CouchbaseService, PlatformService],
+    providers: [ProcessHTTPMsgService, DishService, LeaderService, PromotionService, {provide: 'baseURL', useValue: baseURL}, FavouriteService, PokemonService, CouchbaseService, PlatformService, NewsService],
     schemas: [
         NO_ERRORS_SCHEMA
     ]

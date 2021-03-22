@@ -1,22 +1,30 @@
-<ActionBar >
+<ActionBar>
     <NavigationButton ios:visibility="collapsed" icon="font://&#xf0c9;"  class="fas size" (tap)="onDrawerButtonTap()"></NavigationButton>
     <ActionItem icon="font://&#xf0c9;" android:visibility="collapsed"   class="fas size" (tap)="onDrawerButtonTap()"
         ios.position="left">
     </ActionItem>
     <Label text="Menu"></Label>
+    <ActionItem ios.position="right" android.position="popup">
+        <Label text="&#xf002;" class="fas size" [ngClass]="{isandro : actionAndroid}" (tap)="searching = !searching"></Label>
+    </ActionItem>
   </ActionBar>
-<StackLayout class="page">
-    <ListView [items]="dishes" class="list-group" *ngIf="dishes">
-        <ng-template let-dish="item">
-            <StackLayout orientation="horizontal" class="list-group-item" [nsRouterLink]="['/dishdetail', dish.id]">
-                <Image row="0" col="0" rowSpan="2" height="108" width="108"  [src]="dish.image" class="thumb p-16"></Image>
-                <GridLayout class="list-group-item" rows="auto *" columns="*">
-                    <Label row="0" col="0" [text]="dish.name" class="list-group-item-heading"></Label>
-                    <Label row="1" col="0" class="list-group-item-text" [text]="dish.description"></Label>
-                </GridLayout>
-            </StackLayout>
-        </ng-template>
-    </ListView>
-    <ActivityIndicator busy="true"  *ngIf="!(dishes || errMess)" width="50" height="50" class="activity-indicator"></ActivityIndicator>
-    <Label *ngIf="errMess" [text]="'Error: ' + errMess"></Label>
-</StackLayout>
+  <GridLayout id="list-view" rows="auto *">
+    <SearchBar row="0" *ngIf="searching" hint="Filter News..." (clear)="onClear($event)"
+    (submit)="onSubmit($event)" (textChange)="onTextChange($event)" class="search-bar"></SearchBar>
+    <StackLayout row="1" class="page">
+        <ListView [items]="(searching? filteredDish : dishes)" class="list-group" *ngIf="dishes">
+            <ng-template let-dish="item">
+                <StackLayout orientation="horizontal" class="list-group-item" [nsRouterLink]="['/dishdetail', dish.id]">
+                    <Image row="0" col="0" rowSpan="2" height="108" width="108"  [src]="dish.image" class="thumb p-16"></Image>
+                    <GridLayout class="list-group-item" rows="auto *" columns="*">
+                        <Label row="0" col="0" [text]="dish.name" class="list-group-item-heading"></Label>
+                        <Label row="1" col="0" class="list-group-item-text" [text]="dish.description"></Label>
+                    </GridLayout>
+                </StackLayout>
+            </ng-template>
+        </ListView>
+        <ActivityIndicator busy="true"  *ngIf="!(dishes || errMess)" width="50" height="50" class="activity-indicator"></ActivityIndicator>
+        <Label *ngIf="errMess" [text]="'Error: ' + errMess"></Label>
+    </StackLayout>
+  </GridLayout>
+

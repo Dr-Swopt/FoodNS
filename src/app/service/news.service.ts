@@ -3,8 +3,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, delay, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProcessHTTPMsgService } from "./process-http.service";
-import { Pokemon } from '../shared/pokemon';
-import { baseURL } from "../shared/baseUrl";
+import { DataItem } from '../shared/DataItem';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
@@ -14,23 +13,20 @@ const httpOptions = {
 @Injectable({
   providedIn: "root"
 })
-export class PokemonService {
+export class NewsService {
+
+  newsURL = 'http://10.0.2.2:3000/news/';
 
   constructor(private http: HttpClient,
     private processHTTPMsgService: ProcessHTTPMsgService){}
 
-    getPokemons(): Observable<Pokemon[]> {
-      return this.http.get<Pokemon[]>(baseURL + 'pokemons')
+    getNews(): Observable<DataItem[]> {
+      return this.http.get<DataItem[]>(this.newsURL)
       .pipe(catchError(this.processHTTPMsgService.handleError));
     }
 
-    getPokemon(id: number): Observable<Pokemon> {
-        return this.http.get<Pokemon>(baseURL + 'pokemons/' + id)
+    getNew(id: number): Observable<DataItem> {
+        return this.http.get<DataItem>(this.newsURL + id)
         .pipe(catchError(this.processHTTPMsgService.handleError));
-    }
-
-    getPokemonIds(): Observable<number[] | any >{
-      return this.getPokemons().pipe(map(pokemons => pokemons.map(pokemon => pokemon.id)))
-      .pipe(catchError(this.processHTTPMsgService.handleError));
     }
 }
