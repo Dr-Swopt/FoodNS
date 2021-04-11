@@ -28,15 +28,14 @@ export class DishdetailComponent implements OnInit {
   comment: Comment;
   errMess: string;
   comments: FormGroup;
-  dishIds: number[];
-  prev: number;
-  next: number;
+  dishIds: string[];
+  prev: string;
+  next: string;
   showComments: boolean = false;
 
   cardImage: View;
   commentList: View;
   cardLayout: View;
-  private BaseURL = "http://10.0.2.2:3000/dishes/";
 
   constructor(private dishservice: DishService,
     private favouriteservice : FavouriteService,

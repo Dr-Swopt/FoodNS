@@ -55,11 +55,11 @@ export class PokemonComponent implements OnInit {
   onDrawerButtonTap(): void {
     const sideDrawer = <RadSideDrawer>Application.getRootView();
     sideDrawer.showDrawer();
-}
+    }
 
-templateSelector(item: any, index: number, items: any): string {
-    return item.expanded ? "expanded" : "default";
-  }
+    templateSelector(item: any, index: number, items: any): string {
+        return item.expanded ? "expanded" : "default";
+    }
 
   onItemTap(event: ListViewEventData) {
     const listView = event.object,

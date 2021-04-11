@@ -6,44 +6,24 @@
     <Label text="Home"></Label>
   </ActionBar>
 
-  <search></search>
-  <StackLayout tkMainContent (swipe)="onSwipe($event)">
-    <GridLayout horizontalAlignment="center" verticalAlignment="top" rows="*" columns="*" height="95%">
-        <GridLayout id="leftCard" row="0" margin="5" rows="* auto" columns="*"
-            *ngIf="dish" [visibility]="showLeftCard ? 'visible' : 'collapsed'" class="border">
-            <Image row="0" stretch="aspectFill" [src]="dish.image"></Image>
-            <StackLayout padding="10" row="1">
-                <Label class="h2" [text]="dish.name"></Label>
-                <Label class="body" [text]="dish.description" textWrap="true"></Label>
-            </StackLayout>
-        </GridLayout>
-        <ActivityIndicator busy="true"  *ngIf="!(dish || dishErrMess)" width="50" height="50" class="activity-indicator"></ActivityIndicator>
-        <Label *ngIf="dishErrMess" [text]="'Error: ' + dishErrMess"></Label>
-        <GridLayout id="middleCard" row="0" margin="5" rows="* auto" columns="*"
-            *ngIf="promotion" [visibility]="showMiddleCard ? 'visible' : 'collapsed'" class="border">
-            <Image row="0" stretch="aspectFill" [src]="promotion.image"></Image>
-            <StackLayout padding="10" row="1">
-                <Label class="h2" [text]="promotion.name"></Label>
-                <Label class="body" [text]="promotion.description" textWrap="true"></Label>
-            </StackLayout>
-        </GridLayout>
-        <ActivityIndicator busy="true"  *ngIf="!(promotion || promoErrMess)" width="50" height="50" class="activity-indicator"></ActivityIndicator>
-        <Label *ngIf="promoErrMess" [text]="'Error: ' + promoErrMess"></Label>
-        <GridLayout id="rightCard" row="0" margin="5" rows="* auto" columns="*"
-            *ngIf="leader" [visibility]="showRightCard ? 'visible' : 'collapsed'" class="border">
-            <Image row="0" stretch="aspectFill" [src]="leader.image"></Image>
-            <StackLayout padding="10" row="1">
-                <Label class="h2" [text]="leader.name"></Label>
-                <Label class="h3" [text]="leader.designation"></Label>
-                <Label class="body" [text]="leader.description" textWrap="true"></Label>
-            </StackLayout>
-        </GridLayout>
-        <ActivityIndicator busy="true"  *ngIf="!(leader || leaderErrMess)" width="50" height="50" class="activity-indicator"></ActivityIndicator>
-        <Label *ngIf="leaderErrMess" [text]="'Error: ' + leaderErrMess"></Label>
+  <StackLayout>
+      <GridLayout>
+        <Carousel #myCarousel debug="true" [items]="featured" height="100%" width="100%" color="white" (pageChanged)="myChangePageEvent($event)"
+                android:indicatorAnimation="slide" indicatorColor="#fff" indicatorOffset="0, -10" showIndicator="true">
+            <CarouselItem *ngFor="let item of featured" backgroundColor="#ffffff" verticalAlignment="middle" (tap)="myTapPageEvent()">
+                <GridLayout rows="auto auto auto" class="p-10 border">
+                    <Image row="0" [src]="item.image" stretch="aspectFill"></Image>
+                    <Label row="1" [text]="item.name" horizontalAlignment="center" backgroundColor="#50000000" height="30"></Label>
+                    <Label row="2" style="font-size: 14;" [text]="item.description" backgroundColor="#50000000" textWrap="true"></Label>
+                </GridLayout>
+            </CarouselItem>
+        </Carousel>
     </GridLayout>
-    <StackLayout horizontalAlignment="center" orientation="horizontal">
-        <Label class="m-1-15 fas" [text]="(showLeftCard ? '&#xf111;' : '&#xf1ce;')"></Label>
-        <Label class="m-l-15 fas" [text]="(showMiddleCard ? '&#xf111;' : '&#xf1ce;')"></Label>
-        <Label class="m-l-15 fas" [text]="(showRightCard ? '&#xf111;' : '&#xf1ce;')"></Label>
-    </StackLayout>
-</StackLayout>
+    <label
+      text="Indicator animation type: 'slide'"
+      textWrap="true"
+      ios:visibility="collapsed"
+      margin="10,0,0,0"
+    ></label>
+  </StackLayout>
+

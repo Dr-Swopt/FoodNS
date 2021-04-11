@@ -5,12 +5,12 @@
     </ActionItem>
     <Label text="Pokemon"></Label>
     <ActionItem ios.position="right" android.position="popup">
-        <Label text="&#xf002;" class="fas size" [ngClass]="{isandro : actionAndroid}"></Label>
+        <Label text="&#xf002;" class="fas size" [ngClass]="{isandro : actionAndroid}" (tap)="searching = !searching"></Label>
     </ActionItem>
   </ActionBar>
   <TabView [(ngModel)]="tabSelectedIndex">
     <StackLayout *tabItem="{title: 'Login'}">
-            <SearchBar hint="Filter News..." (clear)="onClear($event)"
+            <SearchBar *ngIf="searching" hint="Filter News..." (clear)="onClear($event)"
             (submit)="onSubmit($event)" (textChange)="onTextChange($event)" class="search-bar"></SearchBar>
             <RadListView [items]="(searching? poke : pokemons)" [itemTemplateSelector]="templateSelector" class="list-group" (itemTap)="onItemTap($event)">
                 <ng-template tkListItemTemplate let-item="item">

@@ -18,14 +18,14 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class DishService {
-    private serverUrl = "https://swopt.com:5000/";
+    private _selectedId = "-1";
 
   constructor(private http: HttpClient,
     private processHTTPMsgService: ProcessHTTPMsgService) { }
 
     getData() {
         let headers = this.createRequestHeader();
-        return this.http.get(this.serverUrl + 'dishes/', { headers: headers });
+        return this.http.get(baseURL + 'dishes/', { headers: headers });
     }
 
     private createRequestHeader() {
@@ -40,17 +40,17 @@ export class DishService {
     }
 
   getDishes(): Observable<Dish[]> {
-    return this.http.get<Dish[]>(this.serverUrl + 'dishes/')
+    return this.http.get<Dish[]>(baseURL + 'dishes/')
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
-  getDish(id: number): Observable<Dish> {
-    return this.http.get<Dish>(this.serverUrl + 'dishes/' + id)
+  getDish(id: string): Observable<Dish> {
+    return this.http.get<Dish>(baseURL + 'dishes/' + id)
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
   getFeaturedDish(): Observable<Dish> {
-    return this.http.get<Dish[]>(this.serverUrl + 'dishes/' + '?featured=true').pipe(map(dishes => dishes[0]))
+    return this.http.get<Dish[]>(baseURL + 'dishes/' + '?featured=true').pipe(map(dishes => dishes[0]))
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 }

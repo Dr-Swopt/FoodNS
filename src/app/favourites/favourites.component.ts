@@ -70,7 +70,7 @@ export class FavouriteComponent implements OnInit {
         this.listViewComponent.listView.notifySwipeToExecuteFinished();
     }
 
-    deleteFavourite(id: number) {
+    deleteFavourite(id: string) {
         console.log('delete', id);
 
         let options = {

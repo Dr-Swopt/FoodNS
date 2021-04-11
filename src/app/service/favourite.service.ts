@@ -9,7 +9,7 @@ import { DishService } from './dish.service';
 @Injectable()
 export class FavouriteService {
 
-    favourites: Array<number>;
+    favourites: Array<string>;
     docId: string = "favourites";
 
     constructor(private dishservice: DishService,
@@ -25,11 +25,11 @@ export class FavouriteService {
             }
     }
 
-    isFavourite(id: number): boolean {
+    isFavourite(id: string): boolean {
         return this.favourites.some(el => el === id);
     }
 
-    addFavourite(id: number): boolean {
+    addFavourite(id: string): boolean {
         if (!this.isFavourite(id)) {
           this.favourites.push(id);
           this.couchbaseService.updateDocument(this.docId, {"favourites": this.favourites});
@@ -50,7 +50,7 @@ export class FavouriteService {
             .pipe(map(dishes => dishes.filter(dish => this.favourites.some(el => el === dish.id))));
     }
 
-    deleteFavourite(id: number): Observable<Dish[]> {
+    deleteFavourite(id: string): Observable<Dish[]> {
         let index = this.favourites.indexOf(id);
         if (index >= 0) {
           this.favourites.splice(index,1);

@@ -1,6 +1,5 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
-import { NativeScriptCommonModule } from "@nativescript/angular";
-import { SearchModule } from "../search/search.module";
+import { NativeScriptCommonModule, NativeScriptHttpClientModule } from "@nativescript/angular";
 
 import { MenuRoutingModule } from "./menu-routing.module";
 import { MenuComponent } from "./menu.component";
@@ -8,7 +7,7 @@ import { MenuComponent } from "./menu.component";
     imports: [
         NativeScriptCommonModule,
         MenuRoutingModule,
-        SearchModule
+        NativeScriptHttpClientModule
     ],
     declarations: [
         MenuComponent,

@@ -1,7 +1,6 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptCommonModule } from "@nativescript/angular";
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
-import { SearchModule } from "../search/search.module";
 
 import { PokemonRoutingModule } from "./pokemon-routing.module";
 import { PokemonComponent } from "./pokemon.component";
@@ -9,8 +8,7 @@ import { PokemonComponent } from "./pokemon.component";
     imports: [
         NativeScriptCommonModule,
         PokemonRoutingModule,
-        NativeScriptUIListViewModule,
-        SearchModule
+        NativeScriptUIListViewModule
     ],
     declarations: [
         PokemonComponent,

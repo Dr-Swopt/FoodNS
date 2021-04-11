@@ -1,6 +1,11 @@
+import { Author } from "./author";
+
 export interface Comment {
-    rating: number;
-    comment: string;
-    author: string;
-    date: string;
+  id?: string;
+  rating?: number;
+  comment?: string;
+  author?: Author;
+  date?: string | any;
 }
+
+
