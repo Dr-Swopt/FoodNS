@@ -1,6 +1,4 @@
-import { TokenModel } from "nativescript-ui-autocomplete";
-
-export interface Pokemon extends TokenModel {
+export interface Pokemon {
     id: string;
     name?: string;
     image?: string;

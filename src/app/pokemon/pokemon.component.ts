@@ -87,7 +87,7 @@ export class PokemonComponent implements OnInit {
         if (searchValue !== "") {
             this.searching = true;
             this.poke = this.pokemons.filter((e) => {
-                return (e.src && e.name && e.description) &&
+                return (e.image && e.name && e.description) &&
                     (e.description.toLowerCase().includes(searchValue) || e.name.toLowerCase().includes(searchValue));
             });
         }
